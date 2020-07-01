@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:http="http://www.springframework.org/schema/c"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+    <!-- spring整合Mybatis的配置，其实主要是mybatis的相应配置 -->
+    <!--
+    sqlSession工厂 mapper的接口配置
+    -->
+    <!--创建SessionFactory-->
+    <bean id="sessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="typeAliasesPackage" value="cn.itlzq.db"/>
+        <!-- 自动扫描mybatis配置文件 -->
+        <property name="configLocation" value="classpath:mybatis-config.xml"/>
+        <property name="mapperLocations" value="classpath:mapper/*.xml"/>
+
+        <!--mybatis方法1：需要写sql，如果使用xml文件来保存sql语句，那么可以配置mapperLocations，全部加载-->
+        <!--        <property name="mapperLocations" value="classpath:com/lzq/mapper" />-->
+    </bean>
+    <!--mybatis配置扫描Dao接口包，动态实现Dao接口，注入到spring容器中 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="cn.itlzq.db" />
+        <property name="sqlSessionFactoryBeanName" value="sessionFactory" />
+    </bean>
+</beans>

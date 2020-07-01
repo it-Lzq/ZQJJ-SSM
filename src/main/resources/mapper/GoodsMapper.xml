@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.itlzq.db.GoodsDao">
+    <select id="findGoodsByClass1" resultType="cn.itlzq.model.Goods">
+        SELECT * FROM JJ_GOODS WHERE CLASSID1 = #{classId1}  ORDER BY PRICE
+        <if test="flag != 0"> DESC</if>
+         LIMIT #{page},#{size}
+    </select>
+
+    <select id="findGoodsByClass2" resultType="cn.itlzq.model.Goods">
+        SELECT * FROM JJ_GOODS WHERE CLASSID2 = #{classId2}  ORDER BY PRICE
+            <if test="flag != 0">DESC</if>
+        LIMIT #{page},#{size}
+    </select>
+
+    <select id="findGoodsLikeName" resultType="cn.itlzq.model.Goods">
+        SELECT * FROM JJ_GOODS WHERE NAME LIKE #{name} ORDER BY PRICE<if test="flag != 0"> DESC</if>
+        LIMIT #{page},#{size}
+    </select>
+</mapper>
