@@ -11,4 +11,6 @@ html、css、js、Jquery、bootstrap、layui、layer、ajax、mysql、tomcat、s
   2.功能模块：用户的注册与登录，数据的友好展示，用户的订单修改
   3.购物车的管理，用户信息的修改展示
   ..
+## 展示界面：![index](.\index.png)
+
  
